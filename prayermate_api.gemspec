@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["ed@prayermate.net"]
 
   spec.summary       = "API to interact with the PrayerMate platform"
-  spec.homepage      = "prayermate.net"
+  spec.homepage      = "https://www.prayermate.net/"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'

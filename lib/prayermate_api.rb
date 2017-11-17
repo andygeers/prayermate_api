@@ -1,5 +1,10 @@
 require "prayermate_api/version"
 
 module PrayerMateApi
-  # Your code goes here...
+
+  class Api
+    def test
+      puts "it worketh"
+    end
+  end
 end
