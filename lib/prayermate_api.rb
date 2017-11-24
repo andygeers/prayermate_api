@@ -28,7 +28,7 @@ module PrayerMateApi
       HTTParty.post(api_path("images/resize"), body: { url: url, target_filename: filename }, headers: http_headers)
     end
 
-    def signup(promo_code, first_name, last_name, email, roles)
+    def register(promo_code, first_name, last_name, email, roles)
       data = {
           :promo_code => promo_code,
           :first_name => first_name,
