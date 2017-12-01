@@ -5,7 +5,7 @@ require "prayermate_api/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "prayermate_api"
-  spec.version       = PrayermateApi::VERSION
+  spec.version       = PrayerMateApi::VERSION
   spec.authors       = ["Edward Bennigsen, Andy Geers"]
   spec.email         = ["ed@prayermate.net"]
 

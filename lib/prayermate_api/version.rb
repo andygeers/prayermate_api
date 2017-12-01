@@ -1,3 +1,3 @@
-module PrayermateApi
+module PrayerMateApi
   VERSION = "0.1.0"
 end
