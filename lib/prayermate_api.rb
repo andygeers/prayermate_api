@@ -1,6 +1,6 @@
-require 'prayermate_api/version'
-require 'httparty'
-require 'securerandom'
+require "prayermate_api/version"
+require "httparty"
+require "securerandom"
 
 module PrayerMateApi
 
@@ -25,7 +25,7 @@ module PrayerMateApi
     end
 
     def resize_image(url, filename)
-      HTTParty.post(api_path('images/resize'), body: { url: url, target_filename: filename }, headers: http_headers)
+      HTTParty.post(api_path("images/resize"), body: { url: url, target_filename: filename }, headers: http_headers)
     end
 
     def register(promo_code, first_name, last_name, email, roles)
@@ -38,17 +38,17 @@ module PrayerMateApi
         roles: roles
       }
 
-      response = post_with_auth('auth/register', data)
+      response = post_with_auth("auth/register", data)
       response[:password] = data[:password]
       response
     end
 
     def update_input_feed(feed_id, petitions, last_modified)
-      HTTParty.post(api_path('input_feeds/process'), body: { feed: { id: feed_id, last_modified: last_modified }, petitions: petitions }, headers: http_headers)
+      HTTParty.post(api_path("input_feeds/process"), body: { feed: { id: feed_id, last_modified: last_modified }, petitions: petitions }, headers: http_headers)
     end
 
     def update_feed(feed_id, petitions, last_modified, url)
-      HTTParty.post(api_path('feeds/process'), body: { feed: { id: feed_id, last_modified: last_modified, static_json_url: url }, petitions: petitions }, headers: http_headers)
+      HTTParty.post(api_path("feeds/process"), body: { feed: { id: feed_id, last_modified: last_modified, static_json_url: url }, petitions: petitions }, headers: http_headers)
     end
 
     def post_with_auth(endpoint, data)
@@ -83,7 +83,7 @@ module PrayerMateApi
     end
 
     def http_headers
-      { 'X-API-Key' => api_key }
+      { "X-API-Key" => api_key }
     end
   end
 end
