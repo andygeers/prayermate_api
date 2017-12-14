@@ -43,12 +43,16 @@ module PrayerMateApi
       response
     end
 
-    def update_input_feed(feed_id, petitions, last_modified)
-      HTTParty.post(api_path("input_feeds/process"), body: { feed: { id: feed_id, last_modified: last_modified }, petitions: petitions }, headers: http_headers)
+    def update_input_feed(feed_id, user_feed_slug, petitions, last_modified)
+      HTTParty.post(api_path("input_feeds/process"),
+                    body: { feed: { id: feed_id, user_feed_slug: user_feed_slug, last_modified: last_modified }, petitions: petitions },
+                    headers: http_headers)
     end
 
     def update_user_feed(feed_id, petitions, last_modified, url)
-      HTTParty.post(api_path("feeds/process"), body: { feed: { id: feed_id, last_modified: last_modified, static_json_url: url }, petitions: petitions }, headers: http_headers)
+      HTTParty.post(api_path("feeds/process"),
+                    body: { feed: { id: feed_id, last_modified: last_modified, static_json_url: url }, petitions: petitions },
+                    headers: http_headers)
     end
 
     def post_with_auth(endpoint, data)
