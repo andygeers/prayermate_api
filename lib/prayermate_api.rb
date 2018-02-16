@@ -60,6 +60,11 @@ module PrayerMateApi
       process_response response
     end
 
+    def put_with_auth(endpoint)
+      response = HTTParty.put(api_path(endpoint), headers: http_headers, basic_auth: auth_hash)
+      process_response response
+    end
+
     def get_with_auth(endpoint)
       response = HTTParty.get(api_path(endpoint), headers: http_headers, basic_auth: auth_hash)
       process_response response
