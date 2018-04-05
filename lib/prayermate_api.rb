@@ -51,9 +51,14 @@ module PrayerMateApi
     end
 
     def update_input_feed(feed_id, user_feed_slug, petitions, last_modified)
-      HTTParty.post(api_path("input_feeds/process"),
-                    body: { feed: { id: feed_id, user_feed_slug: user_feed_slug, last_modified: last_modified }, petitions: petitions },
-                    headers: http_headers)
+      post_with_auth("input_feeds/process", {
+                      feed: {
+                        id: feed_id,
+                        user_feed_slug: user_feed_slug,
+                        last_modified: last_modified
+                      },
+                      petitions: petitions
+                    })
     end
 
     def update_user_feed(feed_id, petitions, last_modified, url)
@@ -95,6 +100,8 @@ module PrayerMateApi
     end
 
     def auth_hash
+      return nil if session_token.nil?
+
       { username: email, password: session_token }
     end
 
