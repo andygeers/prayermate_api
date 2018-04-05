@@ -7,6 +7,13 @@ module PrayerMateApi
   class PrayerMateApiException < RuntimeError
   end
 
+  def self.build_session(email, api_token)
+    {
+      email: email,
+      api_token: api_token
+    }
+  end
+
   def self.api(protocol, host, api_key, session = nil)
     PrayerMateApi::Api.new protocol, host, api_key, session
   end
