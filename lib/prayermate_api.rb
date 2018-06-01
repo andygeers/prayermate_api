@@ -7,6 +7,13 @@ module PrayerMateApi
   class PrayerMateApiException < RuntimeError
   end
 
+  def self.build_session(email, api_token)
+    {
+      email: email,
+      api_token: api_token
+    }
+  end
+
   def self.api(protocol, host, api_key, session = nil)
     PrayerMateApi::Api.new protocol, host, api_key, session
   end
@@ -44,15 +51,25 @@ module PrayerMateApi
     end
 
     def update_input_feed(feed_id, user_feed_slug, petitions, last_modified)
-      HTTParty.post(api_path("input_feeds/process"),
-                    body: { feed: { id: feed_id, user_feed_slug: user_feed_slug, last_modified: last_modified }, petitions: petitions },
-                    headers: http_headers)
+      post_with_auth("input_feeds/process", {
+                      feed: {
+                        id: feed_id,
+                        user_feed_slug: user_feed_slug,
+                        last_modified: last_modified
+                      },
+                      petitions: petitions
+                    })
     end
 
     def update_user_feed(feed_id, petitions, last_modified, url)
-      HTTParty.post(api_path("feeds/process"),
-                    body: { feed: { id: feed_id, last_modified: last_modified, static_json_url: url }, petitions: petitions },
-                    headers: http_headers)
+      post_with_auth("feeds/process", {
+                      feed: {
+                        id: feed_id,
+                        last_modified: last_modified,
+                        static_json_url: url
+                      },
+                      petitions: petitions
+                    })
     end
 
     def post_with_auth(endpoint, data)
@@ -88,6 +105,8 @@ module PrayerMateApi
     end
 
     def auth_hash
+      return nil if session_token.nil?
+
       { username: email, password: session_token }
     end
 
