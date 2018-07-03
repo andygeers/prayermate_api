@@ -77,13 +77,13 @@ module PrayerMateApi
       process_response response
     end
 
-    def put_with_auth(endpoint)
-      response = HTTParty.put(api_path(endpoint), headers: http_headers, basic_auth: auth_hash)
+    def put_with_auth(endpoint, data = nil)
+      response = HTTParty.put(api_path(endpoint), body: data, headers: http_headers, basic_auth: auth_hash)
       process_response response
     end
 
-    def get_with_auth(endpoint)
-      response = HTTParty.get(api_path(endpoint), headers: http_headers, basic_auth: auth_hash)
+    def get_with_auth(endpoint, data = nil)
+      response = HTTParty.get(api_path(endpoint), body: data, headers: http_headers, basic_auth: auth_hash)
       process_response response
     end
 
@@ -97,11 +97,11 @@ module PrayerMateApi
       begin
         body = JSON.parse(response.body)
       rescue => error
-        body = { errors: error.to_s }
+        body = { "errors": error.to_s }
       end
       return body if response.code == 200
 
-      raise PrayerMateApiException, "Status code #{response.code}: #{body[:errors]}"
+      raise PrayerMateApiException, "Status code #{response.code}: #{body["errors"]}"
     end
 
     def auth_hash
