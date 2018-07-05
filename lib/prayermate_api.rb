@@ -22,6 +22,11 @@ module PrayerMateApi
     attr_accessor :url_prefix, :api_key, :session_token, :email
 
     def initialize(protocol, host, api_key, session = nil)
+
+      if protocol.nil? || host.nil? || api_key.nil?
+        raise PrayerMateApiException.new "Missing parameters: protocol: #{protocol}, host: #{host}, api_key: #{api_key}"
+      end
+
       self.url_prefix = "#{protocol}://#{host}/api"
       self.api_key = api_key
 
