@@ -102,7 +102,7 @@ module PrayerMateApi
       begin
         body = JSON.parse(response.body)
       rescue => error
-        body = { "errors": error.to_s }
+        body = { "errors" => error.to_s }
       end
       return body if response.code == 200
 
