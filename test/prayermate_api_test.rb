@@ -44,6 +44,22 @@ class PrayermateApiTest < Minitest::Test
           assert_equal EMAIL, api.email
         end
       end
+
+      describe "with nil parameters" do
+        it "must raise a PrayerMateApiException" do
+          assert_raises PrayerMateApi::PrayerMateApiException do
+            PrayerMateApi.api nil, HOST, API_KEY
+          end
+
+          assert_raises PrayerMateApi::PrayerMateApiException do
+            PrayerMateApi.api PROTOCOL, nil, API_KEY
+          end
+
+          assert_raises PrayerMateApi::PrayerMateApiException do
+            PrayerMateApi.api PROTOCOL, HOST, nil
+          end
+        end
+      end
     end
 
     describe "when asking for the api path" do
