@@ -40,20 +40,14 @@ module PrayerMateApi
       HTTParty.post(api_path("images/resize"), body: { url: url, target_filename: filename }, headers: http_headers)
     end
 
-    def register(promo_code, first_name, last_name, email, roles)
-      data = {
-        promo_code: promo_code,
-        first_name: first_name,
-        last_name: last_name,
-        email: email,
-        password: SecureRandom.hex(8),
-        roles: roles
-      }
-
-      response = post_with_auth("auth/register", data)
-      response[:password] = data[:password]
-      response
+    def register_with_promo_code(promo_code, first_name, last_name, email, roles)
+      register({ promo_code: promo_code }, first_name, last_name, email, roles)
     end
+
+    def register_with_price_plan(price_plan, first_name, last_name, email, roles)
+      register({ price_plan: price_plan }, first_name, last_name, email, roles)
+    end
+
 
     def update_input_feed(feed_id, user_feed_slug, petitions, last_modified)
       post_with_auth("input_feeds/process", {
@@ -93,6 +87,20 @@ module PrayerMateApi
     end
 
     protected
+
+    def register(data, first_name, last_name, email, roles)
+      data.merge!({
+          first_name: first_name,
+          last_name: last_name,
+          email: email,
+          password: SecureRandom.hex(8),
+          roles: roles
+      })
+
+      response = post_with_auth("auth/register", data)
+      response[:password] = data[:password]
+      response
+    end
 
     def api_path(endpoint)
       "#{self.url_prefix}/#{endpoint}"
