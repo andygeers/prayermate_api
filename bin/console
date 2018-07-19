@@ -6,6 +6,12 @@ require "prayermate_api"
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
 
+PROTOCOL = "http"
+HOST = "localhost:3000"
+API_KEY = ENV["PRAYERMATE_API_KEY"]
+
+@api_without_session = PrayerMateApi.api PROTOCOL, HOST, API_KEY
+
 # (If you use this, don't forget to add pry to your Gemfile!)
 # require "pry"
 # Pry.start

@@ -10,3 +10,5 @@
 .idea
 
 Gemfile.lock
+
+.envrc
