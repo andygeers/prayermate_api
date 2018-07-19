@@ -17,6 +17,13 @@ class PrayermateApiTest < Minitest::Test
       @api = PrayerMateApi.api PROTOCOL, HOST, API_KEY, SESSION
     end
 
+    describe "when building a session" do
+      it "must return the correct hash" do
+        session = PrayerMateApi.build_session EMAIL, TOKEN
+        assert_equal SESSION, session
+      end
+    end
+
     describe "when calling the api method" do
       it "must create an api object" do
         api = PrayerMateApi.api PROTOCOL, HOST, API_KEY
