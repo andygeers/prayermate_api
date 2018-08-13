@@ -10,6 +10,7 @@ require "securerandom"
 PROTOCOL = "http"
 HOST = "localhost:3000"
 API_KEY = ENV["PRAYERMATE_API_KEY"]
+
 EMAIL = ENV["EMAIL_FOR_TOKEN"]
 API_TOKEN = ENV["PRAYERMATE_API_TOKEN"]
 
