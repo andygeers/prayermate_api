@@ -40,12 +40,12 @@ module PrayerMateApi
       HTTParty.post(api_path("images/resize"), body: { url: url, target_filename: filename }, headers: http_headers)
     end
 
-    def register_with_promo_code(promo_code, first_name, last_name, email, roles, organisation_details)
-      register({ promo_code: promo_code }.merge(organisation_details), first_name, last_name, email, roles)
+    def register_with_promo_code(promo_code, first_name, last_name, email, roles, organisation)
+      register({ promo_code: promo_code, organisation: organisation }, first_name, last_name, email, roles)
     end
 
-    def register_with_price_plan(price_plan, first_name, last_name, email, roles, organisation_details)
-      register({ price_plan: price_plan }.merge(organisation_details), first_name, last_name, email, roles)
+    def register_with_price_plan(price_plan, first_name, last_name, email, roles, organisation)
+      register({ price_plan: price_plan, organisation: organisation }, first_name, last_name, email, roles)
     end
 
 
